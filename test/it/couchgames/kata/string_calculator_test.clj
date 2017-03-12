@@ -25,4 +25,19 @@
     (is (= 10 (string-calculator "0,0\n1,2,3\n4")))
     (is (= -10 (string-calculator "-0,-0\n-1,-2\n-3,-4\n")))))
 
+(deftest custom-separator
+  (testing "single number, plain character"
+    (is (= 10 (string-calculator "//A\n10"))))
+  (testing "multiple numbers, plain character"
+    (is (= 25 (string-calculator "//A\n10A20A-5"))))
+  (testing "multiple numbers, selecting the default separator explicitly"
+    (is (= 25 (string-calculator "//,\n10,20,-5"))))
+  (testing "multiple numbers, newline still works"
+    (is (= 35 (string-calculator "//;\n10\n20;-5\n10"))))
+  (testing "multiple numbers, ugly separators"
+    (is (= 35 (string-calculator "//$\n10$20$-5$10")))
+    (is (= 35 (string-calculator "//.\n10.20.-5.10")))
+    (is (= 35 (string-calculator "//]\n10]20]-5]10")))))
+
+
 
