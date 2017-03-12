@@ -4,4 +4,7 @@
 
 (deftest basic-single-numbers-tests
   (testing "emtpy string"
-    (is (= 0 (string-calculator "")))))
+    (is (= 0 (string-calculator ""))))
+  (testing "single number"
+    (is (= 42 (string-calculator "42")))
+    (is (= -45 (string-calculator "-45")))))
