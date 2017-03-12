@@ -4,7 +4,8 @@
 (defn- string-to-integer [s]
   (case s
     "" 0
-    (Integer/valueOf s)))
+    (let [v (Integer/valueOf s)]
+      (if (> v 1000) 0 v))))
 
 (defn- get-separator [s]
   (if (= \/ (first s))

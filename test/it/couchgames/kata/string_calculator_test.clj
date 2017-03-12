@@ -12,6 +12,14 @@
          #"Negative numbers not supported \(-45\)"
          (string-calculator "-45")))))
 
+(deftest big-numbers-are-ignored
+  (testing "single number"
+    (is (= 0 (string-calculator "1001")))
+    (is (= 1000 (string-calculator "1000"))))
+  (testing "multiple numbers"
+    (is (= 0 (string-calculator "1001,1002,1003")))
+    (is (= 1 (string-calculator "1010,1,10000")))))
+
 (deftest basic-many-numbers-test
   (testing "two numbers"
     (is (= 552 (string-calculator "465,87")))
