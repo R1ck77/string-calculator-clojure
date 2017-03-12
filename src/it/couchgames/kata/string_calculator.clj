@@ -4,11 +4,11 @@
 (defn- string-to-integer [s]
   (case s
     "" 0
-    (Integer/valueOf s) ))
+    (Integer/valueOf s)))
 
 (defn- get-separator [s]
   (if (= \/ (first s))
-    [ (str (nth s 2)) (apply str (drop 4 s))]
+    [(str (nth s 2)) (apply str (drop 4 s))]
     [ "," s]))
 
 (defn- separator-to-regexp [s]
@@ -16,10 +16,15 @@
    (str "(" (java.util.regex.Pattern/quote s) "|\n)")))
 
 (defn string-calculator [s]
-  (let [[sep s] (get-separator s)]
-    (apply + 
-           (map string-to-integer 
-                (clojure.string/split s (separator-to-regexp sep))))))
+  (let [[sep s] (get-separator s)
+        xn (map string-to-integer 
+                (clojure.string/split s (separator-to-regexp sep)))
+        neg (filter #(< % 0) xn)]
+    (if (not (empty? neg))
+      (throw
+       (UnsupportedOperationException.
+        (str "Negative numbers not supported (" (apply str (interpose "," neg)) ")")))
+      (apply + xn))))
 
 (defn -main
   "I don't do a whole lot ... yet."
