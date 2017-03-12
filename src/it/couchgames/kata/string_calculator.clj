@@ -7,7 +7,9 @@
     (Integer/valueOf s) ))
 
 (defn string-calculator [s]
-  (string-to-integer s))
+  (apply + 
+         (map string-to-integer 
+              (clojure.string/split s #","))))
 
 (defn -main
   "I don't do a whole lot ... yet."
