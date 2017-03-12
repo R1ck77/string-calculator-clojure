@@ -9,6 +9,14 @@
     (is (= 42 (string-calculator "42")))
     (is (= -45 (string-calculator "-45")))))
 
-(deftest basic-two-numbers-test
+(deftest basic-many-numbers-test
   (testing "two numbers"
-    (is (= 552 (string-calculator "465,87")))))
+    (is (= 552 (string-calculator "465,87")))
+    (is (= 1 (string-calculator "0,1")))
+    (is (= -2 (string-calculator "-1,-1"))))
+  (testing "manu numbers"
+    (is (= 10 (string-calculator "0,0,1,2,3,4")))
+    (is (= -10 (string-calculator "-0,-0,-1,-2,-3,-4")))))
+
+
+
