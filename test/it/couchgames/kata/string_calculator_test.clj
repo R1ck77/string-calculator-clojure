@@ -71,6 +71,11 @@
     (is (= 45 (string-calculator "//.\n10.20.5.10")))
     (is (= 45 (string-calculator "//]\n10]20]5]10")))))
 
+(deftest custom-multiple-separators
+  (testing "single number with multiple separators defined"
+    (is (= 18 (string-calculator "//[...][$]\n10...6$2")))
+    (is (= 40 (string-calculator "//[aa][b]\n10aa20\n5b5")))))
+
 (deftest long-delimiters
   (testing "kata's sample"
     (is (= 6 (string-calculator "//[:::]\n1:::2:::3")))))
