@@ -71,5 +71,7 @@
     (is (= 45 (string-calculator "//.\n10.20.5.10")))
     (is (= 45 (string-calculator "//]\n10]20]5]10")))))
 
-
+(deftest long-delimiters
+  (testing "kata's sample"
+    (is (= 6 (string-calculator "//[:::]\n1:::2:::3")))))
 

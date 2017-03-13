@@ -7,9 +7,19 @@
     (let [v (Integer/valueOf s)]
       (if (> v 1000) 0 v))))
 
+(defn- drop-this [to-drop s]
+  (apply str (drop (count to-drop) s)))
+
+(defn- parse-separator-line [s]
+  (let [[all sep1 sep2] (first (re-seq #"//(\[(.+)\]|.)\n" s))]
+    (assert (or (not (nil? sep1)) (not (nil? sep2))))
+    (if (nil? sep2)
+      [sep1 (drop-this all s)]
+      [sep2 (drop-this all s)])))
+
 (defn- get-separator [s]
   (if (= \/ (first s))
-    [(str (nth s 2)) (apply str (drop 4 s))]
+    (parse-separator-line s)
     [ "," s]))
 
 (defn- separator-to-regexp [s]
